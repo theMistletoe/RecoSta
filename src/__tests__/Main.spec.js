@@ -38,13 +38,13 @@ describe("Main", () => {
 
     describe("Display", () => {
 
-        it("displays Main Page", () => {
+        it("displays Main Page Label", () => {
             const { getByText } = render(<Main />);
             expect(getByText("Do Study!!!")).toBeInTheDocument();
         });
 
-        it("displays timer using library", async () => {
-            const { getByText, getAllByTestId, findByText } = render(<Main />);
+        it("displays timer", async () => {
+            const { getByText, findByText } = render(<Main />);
             const _ = await findByText("00:00:01")
             expect(await getByText("00:00:01")).toBeInTheDocument();
         });
