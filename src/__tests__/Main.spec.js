@@ -36,17 +36,26 @@ describe("Main", () => {
         jest.clearAllMocks();
     });
 
-    describe("execute",  () => {
+    describe("Display", () => {
 
-        it("is able to input email", () => {
-            const { getByPlaceholderText } = render(<Main />);
-            expect(getByPlaceholderText("Input GitHub Name")).toBeInTheDocument();
-        });
-
-        it("displays login Button", () => {
+        it("displays Main Page", () => {
             const { getByText } = render(<Main />);
-            expect(getByText("Send")).toBeInTheDocument();
+            expect(getByText("Do Study!!!")).toBeInTheDocument();
         });
+
+        it("displays timer using library", async () => {
+            const { getByText, getAllByTestId, findByText } = render(<Main />);
+            const _ = await findByText("00:00:01")
+            expect(await getByText("00:00:01")).toBeInTheDocument();
+        });
+
+        it("displays End Button", () => {
+            const { getByText } = render(<Main />);
+            expect(getByText("End!")).toBeInTheDocument();
+        });
+    });
+
+    describe("execute",  () => {
 
         it("exec axios by inputed value", async () => {
             const spy = jest.spyOn(axios, 'get').mockImplementation(() => {
@@ -58,7 +67,7 @@ describe("Main", () => {
             const { getByText, getByPlaceholderText, getAllByTestId } = render(<Main />);
 
             fireEvent.change(getByPlaceholderText("Input GitHub Name"), {target: {value: 'theMistletoe'}})
-            fireEvent.click(getByText("Send"))
+            fireEvent.click(getByText("End!"))
 
             await waitForElement(() => getAllByTestId("name"));
             await waitForElement(() => getAllByTestId("url"));

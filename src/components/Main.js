@@ -1,23 +1,40 @@
 import React from "react";
-import axios from "axios"
+import axios from "axios";
+import EasyTimer from "../../node_modules/easytimer.js";
 
 export default class Main extends React.Component {
   
     constructor(props) {
         super(props);
-        this.state = { user: "", url: "", inputName: "" }
+        this.state = { user: "", url: "", inputName: "", timer: new EasyTimer(), timeValues: "" }
 
+        this.tick = this.tick.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.fetchGitHubInfo = this.fetchGitHubInfo.bind(this);
     }
 
     componentDidMount() {
-        // nop
+      this._mounted = true
+      let { timer } = this.state;
+      timer.start();
+      timer.addEventListener("secondsUpdated", this.tick);
+    }
+
+    componentWillUnmount () {
+      this._mounted = false
     }
 
     handleChange(e) {
       this.setState({inputName: e.target.value});
     }
+    
+    tick(e) {
+      let { timer } = this.state;
+      const timeValues = timer.getTimeValues().toString();
+      if(this._mounted) {
+        this.setState({ timeValues: timeValues });
+      }
+  }
 
     async fetchGitHubInfo(e) {
       e.preventDefault();
@@ -30,7 +47,8 @@ export default class Main extends React.Component {
   render() {
     return (
       <div>
-        <h1>Main Page</h1>
+        <h1>Do Study!!!</h1>
+        <div data-testid="DefaultTimer">{this.state.timeValues}</div>
         <form onSubmit={this.fetchGitHubInfo}>
             <div>
                 <label>
@@ -41,7 +59,7 @@ export default class Main extends React.Component {
             
             <div>
               <button type="submit">
-                Send
+                End!
               </button>
             </div>
         </form>
