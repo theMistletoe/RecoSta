@@ -1,18 +1,36 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Main from "./Main";
+import auth from "../utils/libs/firebaseAuth";
 
 export default class App extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            email:"",
+            password:""
+        }
         this.handleLogin = this.handleLogin.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
-    handleLogin() {
-        const rootElement = document.getElementById("root");
-        ReactDOM.render(<Main />, rootElement);
-    }
+    handleChange = (event) => {
+        this.setState({[event.target.name]: event.target.value})
+      }
+
+    async handleLogin(event) {
+        event.preventDefault();
+
+        try {
+            await auth.signInWithEmailAndPassword(this.state.email, this.state.password);
+
+            const rootElement = document.getElementById("root");
+            ReactDOM.render(<Main />, rootElement);
+        } catch (error) {
+            alert(error);
+        }
+      }
 
   render() {
     return (
@@ -22,14 +40,14 @@ export default class App extends React.Component {
             <div>
                 <label>
                     email:
-                    <input type="text" placeholder="Input Your Email Address"></input>
+                    <input type="text" name="email" placeholder="Input Your Email Address" onChange={this.handleChange}></input>
                 </label>
             </div>
 
             <div>
                 <label>
                     password:
-                    <input type="password" placeholder="Password"></input>
+                    <input type="password" name="password" placeholder="Password" onChange={this.handleChange}></input>
                 </label>
             </div>
 
