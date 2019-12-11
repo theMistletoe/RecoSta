@@ -1,16 +1,16 @@
 import React from "react";
 import axios from "axios";
 import EasyTimer from "../../node_modules/easytimer.js";
+import firebase from './../utils/libs/firebase';
 
 export default class Main extends React.Component {
   
     constructor(props) {
         super(props);
-        this.state = { user: "", url: "", inputName: "", timer: new EasyTimer(), timeValues: "" }
+        this.state = { message: '', timer: new EasyTimer(), timeValues: "" }
 
         this.tick = this.tick.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.fetchGitHubInfo = this.fetchGitHubInfo.bind(this);
+        this.saveStudyTime = this.saveStudyTime.bind(this);
     }
 
     componentDidMount() {
@@ -24,10 +24,6 @@ export default class Main extends React.Component {
       this._mounted = false
     }
 
-    handleChange(e) {
-      this.setState({inputName: e.target.value});
-    }
-    
     tick(e) {
       let { timer } = this.state;
       const timeValues = timer.getTimeValues().toString();
@@ -36,37 +32,55 @@ export default class Main extends React.Component {
       }
   }
 
-    async fetchGitHubInfo(e) {
+    async saveStudyTime(e) {
       e.preventDefault();
-      
-      const response = await axios.get(`https://api.github.com/users/${this.state.inputName}`)
-      this.setState({user: response.data.login})
-      this.setState({url: response.data.html_url})
+
+      const self = this;
+      let { timer } = self.state;
+      let { timeValues } = self.state;
+      timer.stop();
+
+      var now = new Date();
+
+      var yyyymmdd = now.getFullYear()+
+          ( "0"+( now.getMonth()+1 ) ).slice(-2)+
+          ( "0"+now.getDate() ).slice(-2);
+
+      const token = await firebase.auth().currentUser.getIdToken();
+      if (token) {
+
+        axios.post('http://localhost:3003/api/v1/studytime', {
+            date: yyyymmdd,
+            studytime: timeValues
+          }, {headers: { authorization: `Bearer ${token}` }})
+          .then(function (response) {
+            console.log(response);
+            self.setState({ message: 'Well Done!' });
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      } else {
+        alert("cant get userIdToken")
+      }
     }
 
   render() {
     return (
       <div>
         <h1>Do Study!!!</h1>
+
+        <div data-testid="message">{this.state.message}</div>
+
         <div data-testid="DefaultTimer">{this.state.timeValues}</div>
-        <form onSubmit={this.fetchGitHubInfo}>
-            <div>
-                <label>
-                    Name:
-                    <input type="text" placeholder="Input GitHub Name" value={this.state.inputName} onChange={this.handleChange}></input>
-                </label>
-            </div>
-            
+
+        <form onSubmit={this.saveStudyTime}>
             <div>
               <button type="submit">
                 End!
               </button>
             </div>
         </form>
-        <ul>
-          <li data-testid="name">{this.state.user}</li>
-          <li data-testid="url">{this.state.url}</li>
-        </ul>
       </div>
     );
   }
