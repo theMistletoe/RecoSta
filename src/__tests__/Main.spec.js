@@ -160,6 +160,23 @@ describe("Main", () => {
             expect(getByText("17:48:22")).toBeInTheDocument();
         });
 
+        it("displays message when no studiedtimes", async () => {
+            const spy = jest.spyOn(axios, 'get').mockImplementation(() => {
+                return {
+                    data: []
+                }
+            });
+
+            const { getByText, findByText } = await render(<Main />);
+
+            await waitForElement(() => findByText("You haven't studied!"));
+
+            expect(firebase.auth().currentUser.getIdToken).toHaveBeenCalled();
+            expect(spy).toHaveBeenCalledWith('http://localhost:3003/api/v1/studytime', 
+            {headers: { authorization: `Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx` }});
+            expect(getByText("You haven't studied!")).toBeInTheDocument();
+        });
+
         it("exec axios by inputed value", async () => {
             
             const spy = await jest.spyOn(axios, 'post').mockImplementation(() => {

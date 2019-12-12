@@ -103,16 +103,16 @@ export default class Main extends React.Component {
                 {this.state.studyTimes.map((studyTime, index) => {
                   return (
                     <tr key={index}>
-                          <td>{studyTime.date}</td>
-                          <td>{studyTime.studytime}</td>
-                        </tr>
+                      <td>{studyTime.date}</td>
+                      <td>{studyTime.studytime}</td>
+                    </tr>
                     )
                   })}
                 </tbody>
               </table>
             )
           } else {
-            // nop
+            return <span>You haven't studied!</span>
           }
         })()}
       </div>
