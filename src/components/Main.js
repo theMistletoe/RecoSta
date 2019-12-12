@@ -1,13 +1,12 @@
 import React from "react";
 import axios from "axios";
-import EasyTimer from "../../node_modules/easytimer.js";
 import firebase from './../utils/libs/firebase';
 
 export default class Main extends React.Component {
   
     constructor(props) {
         super(props);
-        this.state = { message: '', timer: new EasyTimer(), timeValues: "", studyTimes: [] }
+        this.state = { message: '', studiedSeconds: 0, studyTimes: [] }
 
         this.tick = this.tick.bind(this);
         this.saveStudyTime = this.saveStudyTime.bind(this);
@@ -16,14 +15,13 @@ export default class Main extends React.Component {
 
     componentDidMount() {
       this._mounted = true
-      let { timer } = this.state;
-      timer.start();
-      timer.addEventListener("secondsUpdated", this.tick);
+      this.interval = setInterval(this.tick, 1000);
       this.getStudytimes();
     }
 
     componentWillUnmount () {
       this._mounted = false
+      clearInterval(this.interval);
     }
 
     async getStudytimes() {
@@ -38,10 +36,8 @@ export default class Main extends React.Component {
     }
 
     tick(e) {
-      let { timer } = this.state;
-      const timeValues = timer.getTimeValues().toString();
       if(this._mounted) {
-        this.setState({ timeValues: timeValues });
+        this.setState({studiedSeconds: this.state.studiedSeconds + 1});
       }
   }
 
@@ -49,9 +45,6 @@ export default class Main extends React.Component {
       e.preventDefault();
 
       const self = this;
-      let { timer } = self.state;
-      let { timeValues } = self.state;
-      timer.stop();
 
       var now = new Date();
 
@@ -64,11 +57,12 @@ export default class Main extends React.Component {
 
         axios.post('http://localhost:3003/api/v1/studytime', {
             date: yyyymmdd,
-            studytime: timeValues
+            studytime: self.state.studiedSeconds
           }, {headers: { authorization: `Bearer ${token}` }})
           .then(function (response) {
             console.log(response);
             self.setState({ message: 'Well Done!' });
+            clearInterval(self.interval);
           })
           .catch(function (error) {
             console.log(error);
@@ -85,7 +79,7 @@ export default class Main extends React.Component {
 
         <div data-testid="message">{this.state.message}</div>
 
-        <div data-testid="DefaultTimer">{this.state.timeValues}</div>
+        <div data-testid="DefaultTimer">{this.state.studiedSeconds}seconds</div>
 
         <form onSubmit={this.saveStudyTime}>
             <div>
@@ -102,7 +96,7 @@ export default class Main extends React.Component {
                 <thead>
                   <tr>
                     <th>Date</th>
-                    <th>Studied Times</th>
+                    <th>Studied Times(s)</th>
                   </tr>
                 </thead>
                 <tbody>

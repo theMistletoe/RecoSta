@@ -23,10 +23,7 @@ describe("Main", () => {
     beforeEach(() => {
         window._virtualConsole.emit = jest.fn();
 
-        const resp = {
-            data: {login: 'theMistletoe', html_url: 'https://github.com/theMistletoe'}
-        };
-        axios.get.mockResolvedValue(resp);
+        axios.get.mockResolvedValue({data: []});
 
         // https://github.com/mrbenhowl/mocking-firebase-initializeApp-and-firebase-auth-using-jest
         const onAuthStateChanged = jest.fn(() => {
@@ -128,8 +125,8 @@ describe("Main", () => {
 
         it("displays timer", async () => {
             const { getByText, findByText } = render(<Main />);
-            const _ = await findByText("00:00:01")
-            expect(await getByText("00:00:01")).toBeInTheDocument();
+            const _ = await findByText("1seconds")
+            expect(await getByText("1seconds")).toBeInTheDocument();
         });
 
         it("displays End Button", () => {
@@ -143,7 +140,7 @@ describe("Main", () => {
         it("get studytimes", async () => {
             const spy = jest.spyOn(axios, 'get').mockImplementation(() => {
                 return {
-                    data: [{date: '20191121', studytime: '01:32:45'}, {date: '20320408', studytime: '17:48:22'}]
+                    data: [{date: '20191121', studytime: '2315'}, {date: '20320408', studytime: '444'}]
                 }
             });
 
@@ -156,11 +153,11 @@ describe("Main", () => {
             {headers: { authorization: `Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx` }});
 
             expect(getByText("Date")).toBeInTheDocument();
-            expect(getByText("Studied Times")).toBeInTheDocument();
+            expect(getByText("Studied Times(s)")).toBeInTheDocument();
             expect(getByText("20191121")).toBeInTheDocument();
-            expect(getByText("01:32:45")).toBeInTheDocument();
+            expect(getByText("2315")).toBeInTheDocument();
             expect(getByText("20320408")).toBeInTheDocument();
-            expect(getByText("17:48:22")).toBeInTheDocument();
+            expect(getByText("444")).toBeInTheDocument();
         });
 
         it("displays message when no studiedtimes", async () => {
@@ -193,7 +190,7 @@ describe("Main", () => {
             
             const { getByText, getAllByTestId, findByText } = await render(<Main />);
 
-            const _ = await findByText("00:00:01")
+            const _ = await findByText("1seconds")
 
             await fireEvent.click(getByText("End!"))
 
@@ -202,10 +199,10 @@ describe("Main", () => {
             expect(firebase.auth().currentUser.getIdToken).toHaveBeenCalled();
             expect(spy).toHaveBeenCalledWith('http://localhost:3003/api/v1/studytime', {
                 date: yyyymmdd,
-                studytime: '00:00:01'
+                studytime: 1
             }, {headers: { authorization: `Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx` }});
             expect(getByText("Well Done!")).toBeInTheDocument();
-            expect(getByText("00:00:01")).toBeInTheDocument();
+            expect(getByText("1seconds")).toBeInTheDocument();
         });
     });
 });
