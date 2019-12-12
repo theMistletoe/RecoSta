@@ -152,6 +152,7 @@ describe("Main", () => {
             expect(spy).toHaveBeenCalledWith('http://localhost:3003/api/v1/studytime', 
             {headers: { authorization: `Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx` }});
 
+            expect(getByText("You've studieds 2759 seconds!")).toBeInTheDocument();
             expect(getByText("Date")).toBeInTheDocument();
             expect(getByText("Studied Times(s)")).toBeInTheDocument();
             expect(getByText("20191121")).toBeInTheDocument();

@@ -73,6 +73,11 @@ export default class Main extends React.Component {
     }
 
   render() {
+    var totalStudiedTime = 0;
+    this.state.studyTimes.map((studyTime) => {
+      return totalStudiedTime += Number(studyTime.studytime);
+    });
+
     return (
       <div>
         <h1>Do Study!!!</h1>
@@ -88,6 +93,8 @@ export default class Main extends React.Component {
               </button>
             </div>
         </form>
+
+        <h2>You've studieds {totalStudiedTime} seconds!</h2>
 
         {(() => {
           if (this.state.studyTimes.length > 0) {
