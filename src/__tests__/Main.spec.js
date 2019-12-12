@@ -154,6 +154,9 @@ describe("Main", () => {
             expect(firebase.auth().currentUser.getIdToken).toHaveBeenCalled();
             expect(spy).toHaveBeenCalledWith('http://localhost:3003/api/v1/studytime', 
             {headers: { authorization: `Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx` }});
+
+            expect(getByText("Date")).toBeInTheDocument();
+            expect(getByText("Studied Times")).toBeInTheDocument();
             expect(getByText("20191121")).toBeInTheDocument();
             expect(getByText("01:32:45")).toBeInTheDocument();
             expect(getByText("20320408")).toBeInTheDocument();

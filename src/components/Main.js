@@ -99,6 +99,12 @@ export default class Main extends React.Component {
           if (this.state.studyTimes.length > 0) {
             return (
               <table data-testid="studytime-list">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Studied Times</th>
+                  </tr>
+                </thead>
                 <tbody>
                 {this.state.studyTimes.map((studyTime, index) => {
                   return (
