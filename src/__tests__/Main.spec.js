@@ -140,6 +140,26 @@ describe("Main", () => {
 
     describe("execute",  () => {
 
+        it("get studytimes", async () => {
+            const spy = jest.spyOn(axios, 'get').mockImplementation(() => {
+                return {
+                    data: [{date: '20191121', studytime: '01:32:45'}, {date: '20320408', studytime: '17:48:22'}]
+                }
+            });
+
+            const { getByText, getAllByTestId } = await render(<Main />);
+
+            await waitForElement(() => getAllByTestId("studytime-list"));
+
+            expect(firebase.auth().currentUser.getIdToken).toHaveBeenCalled();
+            expect(spy).toHaveBeenCalledWith('http://localhost:3003/api/v1/studytime', 
+            {headers: { authorization: `Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx` }});
+            expect(getByText("20191121")).toBeInTheDocument();
+            expect(getByText("01:32:45")).toBeInTheDocument();
+            expect(getByText("20320408")).toBeInTheDocument();
+            expect(getByText("17:48:22")).toBeInTheDocument();
+        });
+
         it("exec axios by inputed value", async () => {
             
             const spy = await jest.spyOn(axios, 'post').mockImplementation(() => {

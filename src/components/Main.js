@@ -7,10 +7,11 @@ export default class Main extends React.Component {
   
     constructor(props) {
         super(props);
-        this.state = { message: '', timer: new EasyTimer(), timeValues: "" }
+        this.state = { message: '', timer: new EasyTimer(), timeValues: "", studyTimes: [] }
 
         this.tick = this.tick.bind(this);
         this.saveStudyTime = this.saveStudyTime.bind(this);
+        this.getStudytimes = this.getStudytimes.bind(this);
     }
 
     componentDidMount() {
@@ -18,10 +19,22 @@ export default class Main extends React.Component {
       let { timer } = this.state;
       timer.start();
       timer.addEventListener("secondsUpdated", this.tick);
+      this.getStudytimes();
     }
 
     componentWillUnmount () {
       this._mounted = false
+    }
+
+    async getStudytimes() {
+      const token = await firebase.auth().currentUser.getIdToken();
+
+      if (token) {
+        const response = await axios.get('http://localhost:3003/api/v1/studytime', 
+        {headers: { authorization: `Bearer ${token}` }})
+
+        this.setState({ studyTimes: response.data })
+      }
     }
 
     tick(e) {
@@ -81,6 +94,27 @@ export default class Main extends React.Component {
               </button>
             </div>
         </form>
+
+        {(() => {
+          if (this.state.studyTimes.length > 0) {
+            return (
+              <table data-testid="studytime-list">
+                <tbody>
+                {this.state.studyTimes.map((studyTime, index) => {
+                  return (
+                    <tr key={index}>
+                          <td>{studyTime.date}</td>
+                          <td>{studyTime.studytime}</td>
+                        </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            )
+          } else {
+            // nop
+          }
+        })()}
       </div>
     );
   }
