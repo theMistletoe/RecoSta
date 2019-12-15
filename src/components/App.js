@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Main from "./Main";
+import SignUp from "./SignUp";
 import auth from "../utils/libs/firebaseAuth";
 
 export default class App extends React.Component {
@@ -13,6 +14,7 @@ export default class App extends React.Component {
         }
         this.handleLogin = this.handleLogin.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.renderSignUp = this.renderSignUp.bind(this);
     }
 
     handleChange = (event) => {
@@ -31,6 +33,13 @@ export default class App extends React.Component {
             alert(error);
         }
       }
+
+    async renderSignUp(event) {
+        event.preventDefault();
+
+        const rootElement = document.getElementById("root");
+        ReactDOM.render(<SignUp />, rootElement);
+    }
 
   render() {
     return (
@@ -55,6 +64,10 @@ export default class App extends React.Component {
                 <button type="submit">Login</button>
             </div>
         </form>
+
+        <div>
+            <button onClick={this.renderSignUp}>SignUp</button>
+        </div>
       </div>
     );
   }

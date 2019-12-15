@@ -7,6 +7,7 @@ import auth from "../utils/libs/firebaseAuth"
 
 import App from "../components/App";
 import Main from "../components/Main";
+import SignUp from "../components/SignUp";
 
 afterEach(cleanup);
 
@@ -31,6 +32,8 @@ describe("App", () => {
 
     afterEach(() => {
         jest.clearAllMocks();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     describe("Display", () => {
@@ -80,6 +83,16 @@ describe("App", () => {
 
             await expect(spyAuthenticator).toHaveBeenCalledWith("inputEmail", "inputPassword");
             await expect(spyRender).toHaveBeenCalledWith(<Main />, document.getElementById("root"));
+        });
+
+        it("rendor SignUp when SignUp Button is clicked", async () => {
+            const { getByText } = await render(<App />);
+
+            const spyRender = jest.spyOn(ReactDOM, 'render').mockImplementation();
+
+            fireEvent.click(getByText("SignUp"))
+
+            await expect(spyRender).toHaveBeenCalledWith(<SignUp />, document.getElementById("root"));
         });
     });
 });
