@@ -1,6 +1,8 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import axios from "axios";
 import firebase from './../utils/libs/firebase';
+import App from './App'
 
 export default class Main extends React.Component {
   
@@ -13,10 +15,17 @@ export default class Main extends React.Component {
         this.getStudytimes = this.getStudytimes.bind(this);
     }
 
-    componentDidMount() {
-      this._mounted = true
-      this.interval = setInterval(this.tick, 1000);
-      this.getStudytimes();
+    async componentDidMount() {
+      const user = await firebase.auth().onAuthStateChanged();
+
+      if (!user) {
+        const rootElement = await document.getElementById("root");
+        await ReactDOM.render(<App />, rootElement);
+      } else {
+        this._mounted = true
+        this.interval = setInterval(this.tick, 1000);
+        this.getStudytimes();
+      }
     }
 
     componentWillUnmount () {
