@@ -38,6 +38,31 @@ describe("App", () => {
             const { getByText } = render(<SignUp />);
             expect(getByText("SignUp Your Account!")).toBeInTheDocument();
         });
+
+        it("displays email label", () => {
+            const { getByText } = render(<SignUp />);
+            expect(getByText("email:")).toBeInTheDocument();
+        });
+
+        it("is able to input email", () => {
+            const { getByPlaceholderText } = render(<SignUp />);
+            expect(getByPlaceholderText("Input Your Email Address")).toBeInTheDocument();
+        });
+
+        it("displays password label", () => {
+            const { getByText } = render(<SignUp />);
+            expect(getByText("password:")).toBeInTheDocument();
+        });
+
+        it("is able to input password", () => {
+            const { getByPlaceholderText } = render(<SignUp />);
+            expect(getByPlaceholderText("Password")).toBeInTheDocument();
+        });
+
+        it("displays signup Button", () => {
+            const { getByText } = render(<SignUp />);
+            expect(getByText("SignUp")).toBeInTheDocument();
+        });
     });
 
     describe("execute",  () => {
