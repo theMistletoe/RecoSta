@@ -2,6 +2,7 @@ import React from "react";
 import { render, cleanup, fireEvent, waitForElement } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import regeneratorRuntime from "regenerator-runtime";
+import axios from 'axios';
 
 import SignUp from "../components/SignUp";
 
@@ -66,6 +67,21 @@ describe("App", () => {
     });
 
     describe("execute",  () => {
+        it("call post for signup", async () => {
 
+            const spy = await jest.spyOn(axios, 'post').mockImplementation(() => {
+                return Promise.resolve('result of axios post')
+            });
+
+            const { getByText, getByPlaceholderText } = await render(<SignUp />);
+            await fireEvent.change(getByPlaceholderText("Input Your Email Address"), {target: {value: 'inputEmail'}})
+            await fireEvent.change(getByPlaceholderText("Password"), {target: {value: 'inputPassword'}})
+            await fireEvent.click(getByText("SignUp"))
+
+            await expect(spy).toHaveBeenCalledWith('http://localhost:3003/api/v1/auth/signup', {
+                email: 'inputEmail',
+                password: 'inputPassword'
+            });
+        });
     });
 });
