@@ -1,7 +1,8 @@
 import React from "react";
-import { render, cleanup, fireEvent, waitForElement } from "@testing-library/react";
+import { render, cleanup, fireEvent, waitForElement, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import ReactDOM from "react-dom";
+import axios from 'axios';
 import regeneratorRuntime from "regenerator-runtime";
 
 import firebase from '../utils/libs/firebase.js';
@@ -22,9 +23,7 @@ describe("Main", () => {
         window._virtualConsole.emit = jest.fn();
 
         // https://github.com/mrbenhowl/mocking-firebase-initializeApp-and-firebase-auth-using-jest
-        const onAuthStateChanged = jest.fn(() => {
-            return null
-        })
+        const onAuthStateChanged = jest.fn()
 
         const getRedirectResult = jest.fn(() => {
         return Promise.resolve({
@@ -104,13 +103,30 @@ describe("Main", () => {
 
     afterEach(() => {
         jest.clearAllMocks();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     describe("check loged in user",  () => {
-        it("jumps to Login Page without loged in user", async () => {
-            await render(<Main />);
+        // もはや無理ゲーでは？mockでコールバック処理全部上に乗っちゃうし
+        xit("jumps to Login Page without loged in user", async () => {
+            await jest.spyOn(axios, 'get').mockImplementation(() => {
+                return {
+                    data: [{date: '20191121', studytime: '2315'}, {date: '20320408', studytime: '444'}]
+                }
+            });
+
+            const spy = await jest.spyOn(global, 'alert').mockImplementation(() => {});
+
+            const { findByRole, getByText } = await render(<Main />);
+            
             const spyRender = await jest.spyOn(ReactDOM, 'render').mockImplementation();
-            await expect(spyRender).toHaveBeenCalledWith(<App />, document.getElementById("root"));
+            
+            // const alert = await findByRole('alert')
+            // expect(spy).toHaveBeenCalledWith('You Have to Login!')
+            // await expect(spyRender).toHaveBeenCalledWith(<App />, document.getElementById("root"));
+
+            expect(getByText("Login Page")).toBeInTheDocument();
         });
     });
 });

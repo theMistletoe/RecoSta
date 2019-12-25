@@ -31,6 +31,7 @@ export default class SignUp extends React.Component {
       })
       .catch(function (error) {
         console.log(error);
+        alert(`Some Error Occured!:\n${error}`);
       });
     }
 

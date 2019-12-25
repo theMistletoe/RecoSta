@@ -31,7 +31,8 @@ describe("Main", () => {
                 user: {
                 displayName: 'redirectResultTestDisplayName',
                 email: 'redirectTest@test.com',
-                emailVerified: true
+                emailVerified: true,
+                disabled: false
                 }
             })
         })
@@ -114,6 +115,8 @@ describe("Main", () => {
 
     afterEach(() => {
         jest.clearAllMocks();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     describe("Display", () => {

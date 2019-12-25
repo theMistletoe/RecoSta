@@ -13,19 +13,24 @@ export default class Main extends React.Component {
         this.tick = this.tick.bind(this);
         this.saveStudyTime = this.saveStudyTime.bind(this);
         this.getStudytimes = this.getStudytimes.bind(this);
-    }
-
-    async componentDidMount() {
-      const user = await firebase.auth().onAuthStateChanged();
-
-      if (!user) {
-        const rootElement = await document.getElementById("root");
-        await ReactDOM.render(<App />, rootElement);
-      } else {
+      }
+      
+      componentDidMount() {
         this._mounted = true
+        
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user && user.emailVerified && !user.disabled ) {
+            // User is signed in.
+          } else {
+            // User is signed out.
+            alert('You Have to Login!');
+            const rootElement = document.getElementById("root");
+            ReactDOM.render(<App />, rootElement);
+          }
+        });
+        
         this.interval = setInterval(this.tick, 1000);
         this.getStudytimes();
-      }
     }
 
     componentWillUnmount () {
