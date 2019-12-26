@@ -3,6 +3,10 @@ import ReactDOM from "react-dom";
 import Main from "./Main";
 import SignUp from "./SignUp";
 import auth from "../utils/libs/firebaseAuth";
+import Button from "./styling/Button";
+import Padding from "./styling/Padding";
+import InlineWrapper from "./styling/InlineWrapper"
+import Wrapper from "./styling/Wrapper";
 
 export default class App extends React.Component {
 
@@ -43,32 +47,40 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <Wrapper>
         <h1>Login Page</h1>
-        <form onSubmit={this.handleLogin}>
-            <div>
-                <label>
-                    email:
-                    <input type="text" name="email" placeholder="Input Your Email Address" onChange={this.handleChange}></input>
-                </label>
-            </div>
 
-            <div>
-                <label>
-                    password:
-                    <input type="password" name="password" placeholder="Password" onChange={this.handleChange}></input>
-                </label>
-            </div>
+        <Padding top={30}>
+            <form onSubmit={this.handleLogin}>
+                <Padding left={10}>
+                    <InlineWrapper>
+                        <label>email:</label>
+                    </InlineWrapper>
+                    <InlineWrapper>
+                        <Padding left={10}>
+                            <input type="text" name="email" placeholder="Input Your Email Address" onChange={this.handleChange}></input>
+                        </Padding>
+                    </InlineWrapper>
+                </Padding>
 
-            <div>
-                <button type="submit">Login</button>
-            </div>
-        </form>
+                <Padding left={10}>
+                    <InlineWrapper>
+                        <label>password:</label>
+                    </InlineWrapper>
+                    <InlineWrapper>
+                        <Padding left={10}>
+                            <input type="password" name="password" placeholder="Password" onChange={this.handleChange}></input>
+                        </Padding>
+                    </InlineWrapper>
+                </Padding>
 
-        <div>
-            <button onClick={this.renderSignUp}>SignUp</button>
-        </div>
-      </div>
+                <Padding top={50}>
+                        <Button primary type="submit">Login</Button>
+                        <Button onClick={this.renderSignUp}>SignUp</Button>
+                </Padding>
+            </form>
+        </Padding>
+      </Wrapper>
     );
   }
 }
