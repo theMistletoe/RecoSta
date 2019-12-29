@@ -1,6 +1,15 @@
 import React from "react";
 import axios from "axios";
 
+import Button from "./styling/Button";
+import Padding from "./styling/Padding";
+import InlineWrapper from "./styling/InlineWrapper"
+import Wrapper from "./styling/Wrapper";
+import Input from "./styling/Input";
+import Text from "./styling/Text";
+import Form from "./styling/Form";
+import H1 from "./styling/H1";
+
 export default class SignUp extends React.Component {
 
     constructor(props) {
@@ -38,28 +47,36 @@ export default class SignUp extends React.Component {
   render() {
 
     return (
-      <div>
-        <h1>SignUp Your Account!</h1>
-        <form onSubmit={this.handleSignUp}>
-          <div>
-            <label>
-              email:
-              <input type="text" name="email" placeholder="Input Your Email Address" onChange={this.handleChange}></input>
-            </label>
-          </div>
+      <Wrapper>
+        <H1>SignUp<br />Your Account!</H1>
+        <Form onSubmit={this.handleSignUp}>
+          <Padding left={10}>
+            <InlineWrapper>
+              <Text>email:</Text>
+            </InlineWrapper>
+            <InlineWrapper>
+              <Padding left={10}>
+                <Input type="text" name="email" placeholder="Input Your Email Address" onChange={this.handleChange}></Input>
+              </Padding>
+            </InlineWrapper>
+          </Padding>
 
-          <div>
-            <label>
-              password:
-              <input type="password" name="password" placeholder="Password" onChange={this.handleChange}></input>
-            </label>
-          </div>
+          <Padding left={10}>
+            <InlineWrapper>
+              <Text>password:</Text>
+            </InlineWrapper>
+            <InlineWrapper>
+            <Padding left={10}>
+              <Input type="password" name="password" placeholder="Password" onChange={this.handleChange}></Input>
+            </Padding>
+            </InlineWrapper>
+          </Padding>
 
-          <div>
-            <button type="submit">SignUp</button>
-          </div>
-        </form>
-      </div>
+          <Padding top={30}>
+            <Button type="submit">SignUp</Button>
+          </Padding>
+        </Form>
+      </Wrapper>
     );
   }
 }
