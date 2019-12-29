@@ -52,38 +52,38 @@ export default class App extends React.Component {
   render() {
     return (
       <Wrapper>
-        <H1>Record Your Study Times!</H1>
-
-        <Padding top={20}>
-            <Form onSubmit={this.handleLogin}>
-                <Padding left={10}>
-                    <InlineWrapper>
-                        <Text>email:</Text>
-                    </InlineWrapper>
-                    <InlineWrapper>
-                        <Padding left={10}>
-                            <Input type="text" name="email" placeholder="Input Your Email Address" onChange={this.handleChange}></Input>
-                        </Padding>
-                    </InlineWrapper>
-                </Padding>
-
-                <Padding left={10}>
-                    <InlineWrapper>
-                        <Text>password:</Text>
-                    </InlineWrapper>
-                    <InlineWrapper>
-                        <Padding left={10}>
-                            <Input type="password" name="password" placeholder="Password" onChange={this.handleChange}></Input>
-                        </Padding>
-                    </InlineWrapper>
-                </Padding>
-
-                <Padding top={30}>
-                        <Button primary type="submit">Login</Button>
-                        <Button onClick={this.renderSignUp}>SignUp</Button>
-                </Padding>
-            </Form>
+        <Padding top={30}>
+            <H1>Record Your <br />Study Times!</H1>
         </Padding>
+
+        <Form onSubmit={this.handleLogin}>
+            <Padding left={10}>
+                <InlineWrapper>
+                    <Text>email:</Text>
+                </InlineWrapper>
+                <InlineWrapper>
+                    <Padding left={10}>
+                        <Input type="text" name="email" placeholder="Input Your Email Address" onChange={this.handleChange}></Input>
+                    </Padding>
+                </InlineWrapper>
+            </Padding>
+
+            <Padding left={10}>
+                <InlineWrapper>
+                    <Text>password:</Text>
+                </InlineWrapper>
+                <InlineWrapper>
+                    <Padding left={10}>
+                        <Input type="password" name="password" placeholder="Password" onChange={this.handleChange}></Input>
+                    </Padding>
+                </InlineWrapper>
+            </Padding>
+
+            <Padding top={30}>
+                    <Button primary type="submit">Login</Button>
+                    <Button onClick={this.renderSignUp}>SignUp</Button>
+            </Padding>
+        </Form>
       </Wrapper>
     );
   }
