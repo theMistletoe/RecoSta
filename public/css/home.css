@@ -1,0 +1,21 @@
+body {
+    background-image: url(../images/backgorund.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #464646;
+    z-index: 0;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    bottom: -5px;
+    left: -5px;
+    right: -5px;
+    background: inherit;
+    filter: blur(1.5px);
+    z-index: -1;
+}
