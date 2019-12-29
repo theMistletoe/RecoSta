@@ -37,7 +37,7 @@ describe("App", () => {
 
         it("displays SignUp Page", () => {
             const { getByText } = render(<SignUp />);
-            expect(getByText("SignUp Your Account!")).toBeInTheDocument();
+            expect(getByText("SignUpYour Account!")).toBeInTheDocument();
         });
 
         it("displays email label", () => {
