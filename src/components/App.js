@@ -9,6 +9,7 @@ import InlineWrapper from "./styling/InlineWrapper"
 import Wrapper from "./styling/Wrapper";
 import Input from "./styling/Input";
 import Text from "./styling/Text";
+import Form from "./styling/Form";
 
 export default class App extends React.Component {
 
@@ -52,8 +53,8 @@ export default class App extends React.Component {
       <Wrapper>
         <h1>Login Page</h1>
 
-        <Padding top={30}>
-            <form onSubmit={this.handleLogin}>
+        <Padding top={20}>
+            <Form onSubmit={this.handleLogin}>
                 <Padding left={10}>
                     <InlineWrapper>
                         <Text>email:</Text>
@@ -76,11 +77,11 @@ export default class App extends React.Component {
                     </InlineWrapper>
                 </Padding>
 
-                <Padding top={50}>
+                <Padding top={30}>
                         <Button primary type="submit">Login</Button>
                         <Button onClick={this.renderSignUp}>SignUp</Button>
                 </Padding>
-            </form>
+            </Form>
         </Padding>
       </Wrapper>
     );
