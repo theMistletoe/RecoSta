@@ -7,6 +7,8 @@ import Button from "./styling/Button";
 import Padding from "./styling/Padding";
 import InlineWrapper from "./styling/InlineWrapper"
 import Wrapper from "./styling/Wrapper";
+import Input from "./styling/Input";
+import Text from "./styling/Text";
 
 export default class App extends React.Component {
 
@@ -54,22 +56,22 @@ export default class App extends React.Component {
             <form onSubmit={this.handleLogin}>
                 <Padding left={10}>
                     <InlineWrapper>
-                        <label>email:</label>
+                        <Text>email:</Text>
                     </InlineWrapper>
                     <InlineWrapper>
                         <Padding left={10}>
-                            <input type="text" name="email" placeholder="Input Your Email Address" onChange={this.handleChange}></input>
+                            <Input type="text" name="email" placeholder="Input Your Email Address" onChange={this.handleChange}></Input>
                         </Padding>
                     </InlineWrapper>
                 </Padding>
 
                 <Padding left={10}>
                     <InlineWrapper>
-                        <label>password:</label>
+                        <Text>password:</Text>
                     </InlineWrapper>
                     <InlineWrapper>
                         <Padding left={10}>
-                            <input type="password" name="password" placeholder="Password" onChange={this.handleChange}></input>
+                            <Input type="password" name="password" placeholder="Password" onChange={this.handleChange}></Input>
                         </Padding>
                     </InlineWrapper>
                 </Padding>
