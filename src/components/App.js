@@ -10,6 +10,7 @@ import Wrapper from "./styling/Wrapper";
 import Input from "./styling/Input";
 import Text from "./styling/Text";
 import Form from "./styling/Form";
+import H1 from "./styling/H1";
 
 export default class App extends React.Component {
 
@@ -51,7 +52,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Wrapper>
-        <h1>Login Page</h1>
+        <H1>Login Page</H1>
 
         <Padding top={20}>
             <Form onSubmit={this.handleLogin}>
