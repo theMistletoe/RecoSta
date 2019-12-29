@@ -40,7 +40,7 @@ describe("App", () => {
 
         it("displays Login Page", () => {
             const { getByText } = render(<App />);
-            expect(getByText("Login Page")).toBeInTheDocument();
+            expect(getByText("Record Your Study Times!")).toBeInTheDocument();
         });
 
         it("displays email label", () => {

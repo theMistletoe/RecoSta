@@ -52,7 +52,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Wrapper>
-        <H1>Login Page</H1>
+        <H1>Record Your Study Times!</H1>
 
         <Padding top={20}>
             <Form onSubmit={this.handleLogin}>
