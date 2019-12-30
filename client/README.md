@@ -1,5 +1,11 @@
 # How to boot
 
+## prepare
+
+You set dotenv file for firebase and resolve endpoint.
+```.env.test``` is templete, so change values and remove suffix.
+
+
 ```
 yarn install
 yarn test
