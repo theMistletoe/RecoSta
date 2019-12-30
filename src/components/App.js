@@ -11,6 +11,8 @@ import Input from "./styling/Input";
 import Text from "./styling/Text";
 import Form from "./styling/Form";
 import H1 from "./styling/H1";
+import Header from "./Header";
+import Footer from "./Footer";
 
 export default class App extends React.Component {
 
@@ -51,6 +53,10 @@ export default class App extends React.Component {
 
   render() {
     return (
+    <div>
+      <Padding bottom={20}>
+        <Header />
+      </Padding>
       <Wrapper>
         <Padding top={30}>
             <H1>Record Your <br />Study Times!</H1>
@@ -85,6 +91,8 @@ export default class App extends React.Component {
             </Padding>
         </Form>
       </Wrapper>
+      <Footer />
+    </div>
     );
   }
 }
