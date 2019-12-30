@@ -152,7 +152,7 @@ describe("Main", () => {
             await waitForElement(() => getAllByTestId("studytime-list"));
 
             expect(firebase.auth().currentUser.getIdToken).toHaveBeenCalled();
-            expect(spy).toHaveBeenCalledWith('http://localhost:3003/api/v1/studytime', 
+            expect(spy).toHaveBeenCalledWith(`${process.env.REACT_APP_BACKEND_ENDPOINT}/api/v1/studytime`, 
             {headers: { authorization: `Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx` }});
 
             expect(getByText("You've studieds 2759 seconds!")).toBeInTheDocument();
@@ -176,7 +176,7 @@ describe("Main", () => {
             await waitForElement(() => findByText("You haven't studied!"));
 
             expect(firebase.auth().currentUser.getIdToken).toHaveBeenCalled();
-            expect(spy).toHaveBeenCalledWith('http://localhost:3003/api/v1/studytime', 
+            expect(spy).toHaveBeenCalledWith(`${process.env.REACT_APP_BACKEND_ENDPOINT}/api/v1/studytime`, 
             {headers: { authorization: `Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx` }});
             expect(getByText("You haven't studied!")).toBeInTheDocument();
         });
@@ -201,7 +201,7 @@ describe("Main", () => {
             await waitForElement(() => getAllByTestId("message"));
 
             expect(firebase.auth().currentUser.getIdToken).toHaveBeenCalled();
-            expect(spy).toHaveBeenCalledWith('http://localhost:3003/api/v1/studytime', {
+            expect(spy).toHaveBeenCalledWith(`${process.env.REACT_APP_BACKEND_ENDPOINT}/api/v1/studytime`, {
                 date: yyyymmdd,
                 studytime: 1
             }, {headers: { authorization: `Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx` }});

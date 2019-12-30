@@ -78,7 +78,7 @@ describe("App", () => {
             await fireEvent.change(getByPlaceholderText("Password"), {target: {value: 'inputPassword'}})
             await fireEvent.click(getByText("SignUp"))
 
-            await expect(spy).toHaveBeenCalledWith('http://localhost:3003/api/v1/auth/signup', {
+            await expect(spy).toHaveBeenCalledWith(`${process.env.REACT_APP_BACKEND_ENDPOINT}/api/v1/auth/signup`, {
                 email: 'inputEmail',
                 password: 'inputPassword'
             });

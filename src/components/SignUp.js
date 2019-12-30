@@ -32,7 +32,7 @@ export default class SignUp extends React.Component {
     handleSignUp = (event) => {
       event.preventDefault();
 
-      axios.post('http://localhost:3003/api/v1/auth/signup', {
+      axios.post(`${process.env.REACT_APP_BACKEND_ENDPOINT}/api/v1/auth/signup`, {
         email: this.state.email,
         password: this.state.password
       })

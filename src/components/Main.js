@@ -58,7 +58,7 @@ export default class Main extends React.Component {
       const token = await firebase.auth().currentUser.getIdToken();
 
       if (token) {
-        const response = await axios.get('http://localhost:3003/api/v1/studytime', 
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_ENDPOINT}/api/v1/studytime`, 
         {headers: { authorization: `Bearer ${token}` }})
 
         this.setState({ studyTimes: response.data })
@@ -85,7 +85,7 @@ export default class Main extends React.Component {
       const token = await firebase.auth().currentUser.getIdToken();
       if (token) {
 
-        axios.post('http://localhost:3003/api/v1/studytime', {
+        axios.post(`${process.env.REACT_APP_BACKEND_ENDPOINT}/api/v1/studytime`, {
             date: yyyymmdd,
             studytime: self.state.studiedSeconds
           }, {headers: { authorization: `Bearer ${token}` }})
