@@ -10,8 +10,6 @@ body {
 }
 
 body::before {
-    background-color: black;
-    opacity: 0.4;
     content: '';
     position: absolute;
     top: -5px;
