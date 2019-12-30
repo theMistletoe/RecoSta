@@ -60,5 +60,12 @@ typings/
 # next.js build output
 .next
 
+# for macOS
 .DS_Store
 
+# for firebase
+.firebase
+.firebaserc
+
+
+build/
