@@ -10,8 +10,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
-    // res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // allow domain
-    res.header("Access-Control-Allow-Origin", "https://timer-d73c3.web.app"); // allow domain
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // allow domain
+    // res.header("Access-Control-Allow-Origin", "https://timer-d73c3.web.app"); // allow domain : on production
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, authorization, Accept");
     next();
   });
