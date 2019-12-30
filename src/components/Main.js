@@ -116,11 +116,12 @@ export default class Main extends React.Component {
 
         <Wrapper>
           <H1>Do Study!!!</H1>
-          <H1>You've studieds {totalStudiedTime} seconds!</H1>
+          <H1>Total: You've studieds {totalStudiedTime} seconds!</H1>
           <Strong fs="50px" color="#ff1453" data-testid="message">{this.state.message}</Strong>
 
           <Form onSubmit={this.saveStudyTime}>
-            <Text data-testid="DefaultTimer">{this.state.studiedSeconds}seconds</Text>
+            <Text>Now, You've studied</Text><br/>
+            <Text data-testid="DefaultTimer">{this.state.studiedSeconds}seconds</Text><br/>
             <Button type="submit">
               End!
             </Button>

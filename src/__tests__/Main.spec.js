@@ -155,7 +155,8 @@ describe("Main", () => {
             expect(spy).toHaveBeenCalledWith(`${process.env.REACT_APP_BACKEND_ENDPOINT}/api/v1/studytime`, 
             {headers: { authorization: `Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx` }});
 
-            expect(getByText("You've studieds 2759 seconds!")).toBeInTheDocument();
+            expect(getByText("Total: You've studieds 2759 seconds!")).toBeInTheDocument();
+            expect(getByText("Now, You've studied")).toBeInTheDocument();
             expect(getByText("Date")).toBeInTheDocument();
             expect(getByText("Studied Times(s)")).toBeInTheDocument();
             expect(getByText("20191121")).toBeInTheDocument();
