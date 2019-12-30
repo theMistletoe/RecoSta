@@ -2,7 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import firebase from './../utils/libs/firebase';
+
 import App from './App'
+import Header from "./Header";
+import Footer from "./Footer";
 
 import Button from "./styling/Button";
 import Padding from "./styling/Padding";
@@ -12,8 +15,9 @@ import Text from "./styling/Text";
 import Form from "./styling/Form";
 import H1 from "./styling/H1";
 import Hr from "./styling/Hr";
-import Header from "./Header";
-import Footer from "./Footer";
+import Table from "./styling/Table/Table"
+import Th from "./styling/Table/Th"
+import Td from "./styling/Table/Td"
 
 export default class Main extends React.Component {
   
@@ -127,24 +131,24 @@ export default class Main extends React.Component {
             {(() => {
               if (this.state.studyTimes.length > 0) {
                 return (
-                  <table data-testid="studytime-list">
+                  <Table data-testid="studytime-list">
                     <thead>
                       <tr>
-                        <th>Date</th>
-                        <th>Studied Times(s)</th>
+                        <Th>Date</Th>
+                        <Th>Studied Times(s)</Th>
                       </tr>
                     </thead>
                     <tbody>
                     {this.state.studyTimes.map((studyTime, index) => {
                       return (
                         <tr key={index}>
-                          <td>{studyTime.date}</td>
-                          <td>{studyTime.studytime}</td>
+                          <Td>{studyTime.date}</Td>
+                          <Td>{studyTime.studytime}</Td>
                         </tr>
                         )
                       })}
                     </tbody>
-                  </table>
+                  </Table>
                 )
               } else {
                 return <span>You haven't studied!</span>
