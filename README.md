@@ -1,4 +1,4 @@
-# RecoStu
+# RecoSta
 
 Record your study time.
 
