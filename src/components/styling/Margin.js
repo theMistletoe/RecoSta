@@ -5,6 +5,7 @@ const Margin = styled.div`
   margin-right: ${(props) => props.right};
   margin-bottom: ${(props) => props.bottom};
   margin-left: ${(props) => props.left};
+  width: ${(props) => props.width};
 `;
 
 Margin.defaultProps = {

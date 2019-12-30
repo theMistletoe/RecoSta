@@ -4,6 +4,17 @@ import axios from "axios";
 import firebase from './../utils/libs/firebase';
 import App from './App'
 
+import Button from "./styling/Button";
+import Padding from "./styling/Padding";
+import Margin from "./styling/Margin";
+import Wrapper from "./styling/Wrapper";
+import Text from "./styling/Text";
+import Form from "./styling/Form";
+import H1 from "./styling/H1";
+import Hr from "./styling/Hr";
+import Header from "./Header";
+import Footer from "./Footer";
+
 export default class Main extends React.Component {
   
     constructor(props) {
@@ -94,48 +105,54 @@ export default class Main extends React.Component {
 
     return (
       <div>
-        <h1>Do Study!!!</h1>
+        <Padding bottom={40}>
+          <Header />
+        </Padding>
 
-        <div data-testid="message">{this.state.message}</div>
+        <Wrapper>
+          <H1>Do Study!!!</H1>
+          <H1>You've studieds {totalStudiedTime} seconds!</H1>
 
-        <div data-testid="DefaultTimer">{this.state.studiedSeconds}seconds</div>
+          <Form onSubmit={this.saveStudyTime}>
+            <Text data-testid="message">{this.state.message}</Text>
+            <Text data-testid="DefaultTimer">{this.state.studiedSeconds}seconds</Text>
+            <Button type="submit">
+              End!
+            </Button>
+          </Form>
 
-        <form onSubmit={this.saveStudyTime}>
-            <div>
-              <button type="submit">
-                End!
-              </button>
-            </div>
-        </form>
+          <Hr />
 
-        <h2>You've studieds {totalStudiedTime} seconds!</h2>
-
-        {(() => {
-          if (this.state.studyTimes.length > 0) {
-            return (
-              <table data-testid="studytime-list">
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Studied Times(s)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {this.state.studyTimes.map((studyTime, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{studyTime.date}</td>
-                      <td>{studyTime.studytime}</td>
-                    </tr>
-                    )
-                  })}
-                </tbody>
-              </table>
-            )
-          } else {
-            return <span>You haven't studied!</span>
-          }
-        })()}
+          <Margin left="auto" right="auto" width="235px">
+            {(() => {
+              if (this.state.studyTimes.length > 0) {
+                return (
+                  <table data-testid="studytime-list">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Studied Times(s)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {this.state.studyTimes.map((studyTime, index) => {
+                      return (
+                        <tr key={index}>
+                          <td>{studyTime.date}</td>
+                          <td>{studyTime.studytime}</td>
+                        </tr>
+                        )
+                      })}
+                    </tbody>
+                  </table>
+                )
+              } else {
+                return <span>You haven't studied!</span>
+              }
+            })()}
+          </Margin>
+        </Wrapper>
+        <Footer />
       </div>
     );
   }
