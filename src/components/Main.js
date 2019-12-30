@@ -12,6 +12,7 @@ import Padding from "./styling/Padding";
 import Margin from "./styling/Margin";
 import Wrapper from "./styling/Wrapper";
 import Text from "./styling/Text";
+import Strong from "./styling/Strong";
 import Form from "./styling/Form";
 import H1 from "./styling/H1";
 import Hr from "./styling/Hr";
@@ -116,9 +117,9 @@ export default class Main extends React.Component {
         <Wrapper>
           <H1>Do Study!!!</H1>
           <H1>You've studieds {totalStudiedTime} seconds!</H1>
+          <Strong fs="50px" color="#ff1453" data-testid="message">{this.state.message}</Strong>
 
           <Form onSubmit={this.saveStudyTime}>
-            <Text data-testid="message">{this.state.message}</Text>
             <Text data-testid="DefaultTimer">{this.state.studiedSeconds}seconds</Text>
             <Button type="submit">
               End!

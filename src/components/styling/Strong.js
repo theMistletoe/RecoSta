@@ -4,6 +4,7 @@ const Strong = styled.span`
   font-size: ${props => props.fs};
   color: ${props => props.color};
   font-weight: 600;
+  text-shadow: 0 0 10px #333;
 `;
 
 Strong.defaultProps = {
