@@ -4,7 +4,7 @@ Record your study time.
 
 https://timer-d73c3.web.app
 
-![Site Image](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/114040/4a102766-7ba0-ef5c-bf00-b901c209c780.png "Site Image")
+![Site Image](https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F114040%2F4a102766-7ba0-ef5c-bf00-b901c209c780.png?ixlib=rb-1.2.2&auto=format&gif-q=60&q=75&s=2ba74d1f88176aa8651860c193315e1d "Site Image")
 
 # description
 
