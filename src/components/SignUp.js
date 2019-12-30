@@ -9,6 +9,8 @@ import Input from "./styling/Input";
 import Text from "./styling/Text";
 import Form from "./styling/Form";
 import H1 from "./styling/H1";
+import Header from "./Header";
+import Footer from "./Footer";
 
 export default class SignUp extends React.Component {
 
@@ -47,36 +49,42 @@ export default class SignUp extends React.Component {
   render() {
 
     return (
-      <Wrapper>
-        <H1>SignUp<br />Your Account!</H1>
-        <Form onSubmit={this.handleSignUp}>
-          <Padding left={10}>
-            <InlineWrapper>
-              <Text>email:</Text>
-            </InlineWrapper>
-            <InlineWrapper>
-              <Padding left={10}>
-                <Input type="text" name="email" placeholder="Input Your Email Address" onChange={this.handleChange}></Input>
-              </Padding>
-            </InlineWrapper>
-          </Padding>
-
-          <Padding left={10}>
-            <InlineWrapper>
-              <Text>password:</Text>
-            </InlineWrapper>
-            <InlineWrapper>
+      <div>
+        <Padding bottom={40}>
+          <Header />
+        </Padding>
+        <Wrapper>
+          <H1>SignUp<br />Your Account!</H1>
+          <Form onSubmit={this.handleSignUp}>
             <Padding left={10}>
-              <Input type="password" name="password" placeholder="Password" onChange={this.handleChange}></Input>
+              <InlineWrapper>
+                <Text>email:</Text>
+              </InlineWrapper>
+              <InlineWrapper>
+                <Padding left={10}>
+                  <Input type="text" name="email" placeholder="Input Your Email Address" onChange={this.handleChange}></Input>
+                </Padding>
+              </InlineWrapper>
             </Padding>
-            </InlineWrapper>
-          </Padding>
 
-          <Padding top={30}>
-            <Button type="submit">SignUp</Button>
-          </Padding>
-        </Form>
-      </Wrapper>
+            <Padding left={10}>
+              <InlineWrapper>
+                <Text>password:</Text>
+              </InlineWrapper>
+              <InlineWrapper>
+              <Padding left={10}>
+                <Input type="password" name="password" placeholder="Password" onChange={this.handleChange}></Input>
+              </Padding>
+              </InlineWrapper>
+            </Padding>
+
+            <Padding top={30}>
+              <Button type="submit">SignUp</Button>
+            </Padding>
+          </Form>
+        </Wrapper>
+        <Footer />
+      </div>
     );
   }
 }
